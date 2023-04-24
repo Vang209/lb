@@ -2,6 +2,7 @@ package org.example.view;
 
 import org.example.model.Book;
 import org.example.model.Client;
+import org.example.model.Operation;
 import org.example.repository.ClientRepository;
 import org.example.service.BookService;
 import org.example.service.ClientService;
@@ -65,18 +66,19 @@ public class ClientView {
         int clientMyBook = scanner.nextInt();
         if(clientMyBook == 1){
             Book book = bookView.serviceClient();
-            bookService.TakeBook(client, book);
+            bookService.Operation(client, book, Operation.TAKE);
         } else if (clientMyBook == 2) {
             Book book = bookView.serviceClient();
-            bookService.ReturnBook(client, book);
+            bookService.Operation(client, book, Operation.RETURN);
         } else if (clientMyBook == 3) {
             bookService.ClientBook(client);
         }
     }
 
     public void ClientList(){
-        for (int i = 0; i< ClientRepository.clients.size(); i++){
-            System.out.println(ClientRepository.clients.get(i).getNameClient());
+        ClientRepository clientRepository = new ClientRepository();
+        for (int i = 0; i< clientRepository.clients.size(); i++){
+            System.out.println(clientRepository.clients.get(i).getNameClient());
         }
     }
 

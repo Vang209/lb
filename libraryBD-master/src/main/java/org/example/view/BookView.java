@@ -1,12 +1,11 @@
 package org.example.view;
 
 import org.example.model.Book;
-import org.example.model.Client;
 import org.example.model.Genre;
-import org.example.repository.BookRepository;
-import org.example.repository.ClientRepository;
+import org.example.service.BookService;
 
 import java.util.Scanner;
+
 
 public class BookView {
     public Book serviceClient(){
@@ -25,8 +24,10 @@ public class BookView {
         return clientBook;
     }
     public void BookList(){
-        for (int i = 0; i< BookRepository.books.size(); i++){
-            System.out.println(BookRepository.books.get(i).getAuthor()+" "+BookRepository.books.get(i).getTitle()+" "+BookRepository.books.get(i).getGenre().getTitleGenre());
+        BookService bookService = new BookService();
+        for (int i = 0; i< bookService.BookSize(); i++){
+            Book book = bookService.BookNumberI(i);
+            System.out.println(book.getAuthor()+" "+book.getTitle()+" "+book.getGenre().getTitleGenre());
         }
     }
     public void GenreList(){

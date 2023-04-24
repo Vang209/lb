@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class ClientRepository {
-    public static List<Client> clients = new ArrayList<>();
+    public List<Client> clients = new ArrayList<>();
 
-    public static List<Client> getClients() {
+    public List<Client> getClients() {
         return clients;
     }
 

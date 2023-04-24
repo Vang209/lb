@@ -1,13 +1,38 @@
 package org.example.model;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Scanner;
 
-public class DatabaseConnection {
-    private static final String USR="jdbc:mysql://localhost:3306/mysql";
-    private static final String USERNAME="root1";
-    private static final String PASSWORD="root";
+public class DatabaseConnection{
+
+
+    private String separator = File.separator;
+    private String path = "C:"+separator+"Users"+separator+"alesnov"+separator+"Desktop"+separator+"LoginDatabase";
+
+    private File file = new File(path);
+
+    private String[] login;
+    private Scanner scanner;
+
+    {
+        try {
+            scanner = new Scanner(file);
+            String line = scanner.nextLine();
+            login = line.split(" ");
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    private final String USR = login[0];
+    private final String USERNAME = login[1];
+    private final String PASSWORD = login[2];
 
     private Connection connection;
 

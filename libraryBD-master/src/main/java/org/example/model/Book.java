@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Book implements Serializable {
-    private int Id;
+    private int id;
     private Genre genre;
     private String author;
     private String title;
@@ -24,13 +24,13 @@ public class Book implements Serializable {
     public String getTitle(){return title;}
     public void setTitle(String title){this.title = title;}
 
-    public int getId() {return Id;}
+    public int getId() {return id;}
 
-    public void setId(int id) {Id = id;}
+    public void setId(int id) {id = id;}
 
 
     public Book(int id,Genre genre, String author, String title, UUID clientId){
-        this.Id = id;
+        this.id = id;
         this.author = author;
         this.title = title;
         this.genre = genre;

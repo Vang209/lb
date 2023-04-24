@@ -12,6 +12,7 @@ public class DatabaseRepository {
 
     public static void ReadDatabase(){
         DatabaseConnection database = new DatabaseConnection();
+        ClientRepository clientRepository = new ClientRepository();
 
         try {
             Statement statement = database.getConnection().createStatement();
@@ -30,8 +31,8 @@ public class DatabaseRepository {
                     clientUUID = UUID.fromString(clientId);
                 } else clientUUID = null;
 
-
-                BookRepository.books.add(new Book(id, Genre.fromTitle(genre), author, title, clientUUID));
+                BookRepository bookRepository = new BookRepository();
+                bookRepository.books.add(new Book(id, Genre.fromTitle(genre), author, title, clientUUID));
 
                 lineNumber++;
             }
@@ -46,7 +47,7 @@ public class DatabaseRepository {
                 String client = resultSetClient.getString(2);
                 UUID uuid = UUID.fromString(resultSetClient.getString(3));
 
-                ClientRepository.clients.add(new Client(id, uuid, client));
+                clientRepository.clients.add(new Client(uuid, client));
 
                 lineNumber++;
             }
@@ -59,12 +60,12 @@ public class DatabaseRepository {
 
                 int id = resultSetLog.getInt(1);
                 int book = resultSetLog.getInt(2);
-                int clientId = resultSetLog.getInt(3);
-                String takeOrReturn = resultSetLog.getString(4);
+                UUID clientUuid = (UUID) resultSetLog.getObject(3);
+                String operation = resultSetLog.getString(4);
                 LocalDate date = (LocalDate) resultSetLog.getObject(5);
 
-
-                LogRepository.logs.add(new Log(id, book, clientId, takeOrReturn, date));
+                LogRepository logRepository = new LogRepository();
+                logRepository.logs.add(new Log(id, book, clientUuid, Operation.fromOperation(operation), date));
 
                 lineNumber++;
             }
@@ -74,7 +75,7 @@ public class DatabaseRepository {
         }
     }
 
-    public static void UpdateBook(List<Book> books, Book book){
+    public void UpdateBook(List<Book> books, Book book){
         DatabaseConnection database = new DatabaseConnection();
 
         int bookNumber = 0;
@@ -94,14 +95,14 @@ public class DatabaseRepository {
     }
 
 
-    public static void UpdateLogs(Log log){
+    public void CreateLogs(Log log){
         DatabaseConnection database = new DatabaseConnection();
 
         LocalDate sqlDate = LocalDate.from(log.getDate());
 
         try(Connection connection = database.getConnection(); Statement statement = connection.createStatement()) {
 
-            statement.execute("insert into librarydb.log (book_id, client_id, take_or_return, date) values ("+log.getBook()+", "+log.getClientId()+", '"+log.getTakeOrReturned()+"', "+sqlDate+")");
+            statement.execute("insert into librarydb.log (book_id, client_id, take_or_return, date) values ("+log.getBook()+", "+log.getClientUuid() +", '"+log.getOperation()+"', "+sqlDate+")");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

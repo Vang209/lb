@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookRepository {
-    public static List<Book> books = new ArrayList<>();
+    public List<Book> books = new ArrayList<>();
 
 
     private void setBooks(List<Book> books) {

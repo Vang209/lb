@@ -7,16 +7,10 @@ import java.util.UUID;
 public class Client implements Serializable {
 
 
-    UUID uuid = UUID.randomUUID();
-
-    public int getId() {return id;}
-
-    public void setId(int id) {this.id = id;}
-
-    int id;
+    private UUID uuid = UUID.randomUUID();
 
     public String getNameClient() {return nameClient;}
-    public String nameClient;
+    private String nameClient;
     public UUID getUuid(){return uuid;}
     public void setUuid(UUID uuid) {this.uuid = uuid;}
 
@@ -35,11 +29,6 @@ public class Client implements Serializable {
     public Client(UUID uuid, String nameClient){
         this.nameClient=nameClient;
         this.uuid=uuid;
-    }
-    public Client(int id,UUID uuid, String nameClient){
-        this.nameClient=nameClient;
-        this.uuid=uuid;
-        this.id=id;
     }
 
     public static String getClientNameForMyBooks() {

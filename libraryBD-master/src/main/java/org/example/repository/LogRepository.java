@@ -6,13 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LogRepository {
-    public static List<Log> logs = new ArrayList<>();
+    public List<Log> logs = new ArrayList<>();
 
+    public List<Log> getLogs() {return logs;}
+    public void setLogs(List<Log> logs) {this.logs = logs;}
 
-    public static List<Log> getLogs() {
-        return logs;
-    }
-    public static void setLogs(List<Log> logs) {
-        LogRepository.logs = logs;
-    }
 }

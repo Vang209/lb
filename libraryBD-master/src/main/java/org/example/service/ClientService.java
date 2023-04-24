@@ -12,10 +12,11 @@ public class ClientService {
 
 
     public Client Login(String nameClient){
-        for(int i = 0; i< ClientRepository.clients.size(); i++){
-            if(ClientRepository.clients.get(i).getNameClient().equals(nameClient)){
+        ClientRepository clientRepository = new ClientRepository();
+        for(int i = 0; i< clientRepository.clients.size(); i++){
+            if(clientRepository.clients.get(i).getNameClient().equals(nameClient)){
                 System.out.println("Вы авторизовались, добро пожаловать, "+nameClient);
-                return ClientRepository.getClients().get(i);
+                return clientRepository.getClients().get(i);
             }
         }
         System.out.println("Нам не удалось найти такого пользователя :(");

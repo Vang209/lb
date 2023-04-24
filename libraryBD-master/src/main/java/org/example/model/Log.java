@@ -7,8 +7,8 @@ import java.util.UUID;
 public class Log{
     private int book_id;
     private int id;
-    private int clientId;
-    private String takeOrReturned;
+    private UUID clientUuid;
+    private Operation Operation;
     private LocalDate date;
 
 
@@ -17,40 +17,32 @@ public class Log{
     public String toString() {
         return "Log{" +
                 "book=" + book_id +
-                ", clientId=" + clientId +
-                ", takeOrReturned='" + takeOrReturned + '\'' +
+                ", clientId=" + clientUuid +
+                ", takeOrReturned='" + Operation + '\'' +
                 ", date=" + date +
                 '}';
     }
 
-    public Log(int book, int clientId, String takeOrReturned, LocalDate date){
+    public Log(int book, UUID clientUuid, Operation Operation, LocalDate date){
         this.book_id = book;
-        this.clientId = clientId;
-        this.takeOrReturned = takeOrReturned;
+        this.clientUuid = clientUuid;
+        this.Operation = Operation;
         this.date = date;
     }
-    public Log(int id, int book, int clientId, String takeOrReturned, LocalDate date){
+    public Log(int id, int book, UUID clientUuid, Operation Operation, LocalDate date){
         this.id = id;
         this.book_id = book;
-        this.clientId = clientId;
-        this.takeOrReturned = takeOrReturned;
+        this.clientUuid = clientUuid;
+        this.Operation = Operation;
         this.date = date;
     }
 
-    public String getTakeOrReturned() {
-        return takeOrReturned;
+    public Operation getOperation() {
+        return Operation;
     }
 
-    public void setTakeOrReturned(String takeOrReturned) {
-        this.takeOrReturned = takeOrReturned;
-    }
-
-    public int getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
+    public void setOperation(Operation Operation) {
+        this.Operation = Operation;
     }
 
     public int getBook() {
@@ -64,4 +56,6 @@ public class Log{
     public LocalDate getDate() {return date;}
 
     public void setDate(LocalDate date) {this.date = date;}
+
+    public UUID getClientUuid() {return clientUuid;}
 }
